@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MATE</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #3d5791;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #22d3ee;
+      --accent2: #a78bfa;
+      --border: #1f2937;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: #1b3980;
+      /* color sólido para que no opaque */
+      padding: 6px 12px;
+      border-bottom: 1px solid #0b3e85;
+      overflow-x: auto;
+      /* permite desplazar el menú si es largo */
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px 20px;
+    }
+
+    h1 {
+      margin: 8px 0 16px;
+      font-size: 28px;
+      letter-spacing: .4px;
+    }
+    nav {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      white-space: nowrap;
+      /* evita que los enlaces se rompan en varias líneas */
+    }
+    nav a {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #0d0d0d;
+      /* letras blancas */
+      background-color: #003399;
+      /* azul rey */
+      transition: all 0.2s ease;
+    }
+    nav a:hover {
+      background-color: #0055cc;
+      /* azul más claro al pasar el mouse */
+      color: #fffafa;
+    }
+    main .section {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      margin: 18px 0;
+      background: var(--panel);
+    }
+
+    .section header {
+      position: static;
+      background: transparent;
+      border: none;
+    }
+
+    .section h2 {
+      margin: 0;
+      padding: 18px 20px;
+      font-size: 22px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .content {
+      padding: 16px 20px;
+    }
+
+    .content p {
+      margin: 0 0 12px;
+      line-height: 1.55;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px dashed var(--border);
+      padding: 3px 8px;
+      border-radius: 999px;
+      margin-left: 8px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      background: #0a1322;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      color: var(--accent2);
+    }
+
+    .list {
+      margin: 10px 0;
+      padding-left: 18px;
+    }
+
+    .list li {
+      margin: 6px 0;
+    }
+
+    .list li b {
+      color: var(--accent);
+    }
+
+    code,
+    kbd {
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 30px 20px;
+    }
+
+    .toc-title {
+      font-size: 14px;
+      color: var(--muted);
+      margin: -6px 0 10px;
+    }
+
+    .note {
+      border-left: 3px solid var(--accent);
+      padding-left: 10px;
+      color: var(--muted);
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f7fafc;
+        --panel: #ffffff;
+        --text: #0f172a;
+        --muted: #4b5563;
+        --accent: #0ea5e9;
+        --accent2: #7c3aed;
+        --border: #e5e7eb;
+      }
+
+      nav a {
+        background: #f8fafc;
+      }
+
+      .card {
+        background: #f9fafb;
+      }
+
+      .badge {
+        border-color: #e5e7eb;
+      }
+    }
+/* Animación de rebote al llegar a la sección */
+.section:target h2 {
+  animation: rebote 0.8s ease;
+}
+
+
+/* Keyframes del rebote */
+@keyframes rebote {
+  0% {
+    transform: translateY(40px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+  70% {
+    transform: translateY(6px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.section h2 {
+  scroll-margin-top: 160px;
+}
+/* Animación rebote */
+.rebote {
+  animation: rebote 0.8s ease;
+}
+
+@keyframes rebote {
+  0%   { transform: translateY(40px); }
+  50%  { transform: translateY(-12px); }
+  70%  { transform: translateY(6px); }
+  100% { transform: translateY(0); }
+}
+.btn {
+  display: inline-block;
+  background-color: #0a1f44; /* azul marino */
+  color: white;
+  text-decoration: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #123b7a;
+  transform: scale(1.08);
+}
+
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Matemáticas </h1>
+      <p class="toc-title">Temario</p>
+      
+      <nav aria-label="Temario">
+        <a href="#estadistica">1. Estadística</a>
+        <a href="#incertidumbre">2. Incertidumbre y variabilidad</a>
+        <a href="#equiprobabilidad">3. Equiprobabilidad, hipótesis, probabilidad, frecuencia y simulación</a>
+        <a href="#conteo">4. Técnica de conteo</a>
+        <a href="#bayes">5. Teorema de Bayes</a>
+        <a href="#graficas">6. Análisis de gráficas (cualitativas y cuantitativas)</a>
+        <a href="#categoricas">7. Variables categóricas</a>
+        <a href="#contingencia">8. Tablas de contingencia</a>
+        <a href="#cuantitativas">9. Variables cuantitativas</a>
+        <a href="#atipicos">10. Estadística con gráfica considerando valores atípicos</a>
+        <a href="#simpson">11. Paradoja de Simpson</a>
+        <a href="#muestreo">12. Imposibilidad, técnica de muestreo y aleatoriedad</a>
+        <a href="#frecuencia">13. Tabla de frecuencia, absoluta y relativa</a>
+        <a href="#condicional">14. Probabilidad condicional</a>
+        <a href="#factorial">15. Factorial</a>
+        <a href="#producto">16. Regla de producto</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap">
+    <section id="estadistica" class="section">
+      <header>
+        <h2>Estadística</h2>
+      </header>
+      <div class="content">
+        <p>La estadística estudia cómo recolectar, organizar, analizar e interpretar datos para tomar decisiones
+          informadas.</p>
+        <ul class="list">
+          <li><b>Descriptiva:</b> Resume datos con medidas (media, mediana, moda) y visualizaciones.</li>
+          <li><b>Inferencial:</b> Extrae conclusiones sobre una población a partir de una muestra usando probabilidad.
+          </li>
+          <li><b>Proceso estadístico:</b> Plantear pregunta, recolectar datos, analizar, concluir y comunicar.</li>
+        </ul>
+        <div class="note">Consejo: define claramente la población y la variable antes de medir o inferir.</div>
+        <h4 style="color:#0B3D91;">
+          Para entender más el tema mira este video explicativo 👇
+        </h4>
+        <a href="https://youtu.be/Xq3thcQqwbc" target="_blank">
+          <img src="https://img.youtube.com/vi/Xq3thcQqwbc/hqdefault.jpg" alt="Ver video"
+            style="width:100%; border-radius:12px;">
+        </a>
+      </div>
+    </section>
+    <section id="incertidumbre" class="section">
+      <header>
+        <h2>Incertidumbre y variabilidad</h2>
+      </header>
+      <div class="content">
+        <p>La variabilidad describe cómo cambian los datos; la incertidumbre refleja límites en lo que podemos conocer o
+          predecir.</p>
+        <ul class="list">
+          <li><b>Fuentes:</b> Muestreo, medición, entorno y modelo.</li>
+          <li><b>Medidas:</b> Rango, varianza y desviación estándar para cuantificar dispersión.</li>
+          <li><b>Interpretación:</b> Más variabilidad implica mayor incertidumbre en inferencias.</li>
+        </ul>
+        <h4 style="color:#0B3D91;">Para entender más el tema mira este video explicativo 👇</h4>
+        <a href="https://youtu.be/wn0wbWIFOPc" target="_blank">
+          <img src="https://img.youtube.com/vi/wn0wbWIFOPc/hqdefault.jpg" alt="Ver video"
+            style="width:100%; border-radius:12px;">
+        </a>
+      </div>
+    </section>
+    <section id="equiprobabilidad" class="section">
+      <header>
+        <h2>Equiprobabilidad, hipótesis, probabilidad, frecuencia y simulación</h2>
+      </header>
+      <div class="content">
+        <div class="grid">
+          <div class="card">
+            <h3>Equiprobabilidad</h3>
+            <p>En un experimento aleatorio, todos los resultados tienen la misma probabilidad (p.ej., cara/cruz ideal).
+            </p>
+          </div>
+          <div class="card">
+            <h3>Hipótesis</h3>
+            <p>Proposición verificable sobre un fenómeno. En estadística: <code>H0</code> (nula) vs <code>H1</code>
+              (alternativa).</p>
+          </div>
+          <div class="card">
+            <h3>Probabilidad</h3>
+            <p>Medida entre 0 y 1 de ocurrencia de un evento; puede ser clásica, frecuentista o bayesiana.</p>
+          </div>
+          <div class="card">
+            <h3>Frecuencia</h3>
+            <p>Conteo de ocurrencias; la frecuencia relativa aproxima la probabilidad al repetir el experimento.</p>
+          </div>
+          <div class="card">
+            <h3>Simulación</h3>
+            <p>Uso de experimentos computacionales para estimar probabilidades y validar hipótesis.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="conteo" class="section">
+      <header>
+        <h2>Técnica de conteo</h2>
+      </header>
+      <div class="content">
+        <ul class="list">
+          <li><b>Principio aditivo:</b> Si tareas son excluyentes, total = suma de opciones.</li>
+          <li><b>Principio multiplicativo:</b> Si tareas son sucesivas, total = producto de opciones.</li>
+          <li><b>Permutaciones:</b> Ordenaciones de elementos, con o sin repetición.</li>
+          <li><b>Combinaciones:</b> Selecciones sin importar el orden.</li>
+        </ul>
+        <h4 style="color:#0B3D91;">Para entender más el tema mira este video explicativo 👇</h4>
+        <a href="https://youtu.be/3RAvqpEvYFw" target="_blank">
+          <img src="https://img.youtube.com/vi/3RAvqpEvYFw/hqdefault.jpg" alt="Ver video"
+            style="width:100%; border-radius:12px;">
+        </a>
+      </div>
+    </section>
+    <section id="bayes" class="section">
+      <header>
+        <h2>Teorema de Bayes</h2>
+      </header>
+      <div class="content">
+        <p>Actualiza la probabilidad de una hipótesis con evidencia nueva: <code>P(A|B) = P(B|A) P(A) / P(B)</code>.</p>
+        <ul class="list">
+          <li><b>Priori:</b> Creencia inicial <code>P(A)</code>.</li>
+          <li><b>Verosimilitud:</b> Evidencia <code>P(B|A)</code>.</li>
+          <li><b>Posteriori:</b> Creencia actualizada <code>P(A|B)</code>.</li>
+        </ul>
+        <h4 style="color:#0B3D91;">Para entender más el tema mira este video explicativo 👇</h4>
+        <a href="https://youtu.be/bDfCURXoKkU" target="_blank">
+          <img src="https://img.youtube.com/vi/bDfCURXoKkU/hqdefault.jpg" alt="Ver video"
+            style="width:100%; border-radius:12px;">
+        </a>
+      </div>
+    </section>
+    <section id="graficas" class="section">
+      <header>
+        <h2>Análisis de gráficas cualitativas y cuantitativas</h2>
+      </header>
+      <div class="content">
+        <ul class="list">
+          <li><b>Cualitativas:</b> Barras y sectores para categorías; comparar proporciones y distribuciones.</li>
+          <li><b>Cuantitativas:</b> Histogramas, cajas y bigotes, dispersión; evaluar forma, centro y dispersión.</li>
+          <li><b>Buenas prácticas:</b> Escalas claras, etiquetas, contexto y evitar distorsión visual.</li>
+        </ul>
+      </div>
+    </section>
+    <section id="categoricas" class="section">
+      <header>
+        <h2>Variables categóricas</h2>
+      </header>
+      <div class="content">
+        <ul class="list">
+          <li><b>Nominales:</b> Sin orden (p.ej., color).</li>
+          <li><b>Ordinales:</b> Con orden (p.ej., nivel de satisfacción).</li>
+          <li><b>Resumen:</b> Frecuencias, proporciones y modo.</li>
+        </ul>
+      </div>
+    </section>
+    <section id="contingencia" class="section">
+      <header>
+        <h2>Tablas de contingencia</h2>
+      </header>
+      <div class="content">
+        <p>Organizan frecuencias de dos variables categóricas y permiten estudiar asociación.</p>
+        <ul class="list">
+          <li><b>Totales marginales:</b> Sumas por filas y columnas.</li>
+          <li><b>Proporciones condicionales:</b> Comparan distribución dentro de una categoría.</li>
+          <li><b>Independencia:</b> Si las proporciones se mantienen similares entre categorías.</li>
+        </ul>
+      </div>
+    </section>
+    <section id="cuantitativas" class="section">
+      <header>
+        <h2>Variables cuantitativas</h2>
+      </header>
+      <div class="content">
+        <ul class="list">
+          <li><b>Continuas:</b> Pueden tomar infinitos valores en un intervalo.</li>
+          <li><b>Discretas:</b> Conteos enteros.</li>
+          <li><b>Medidas clave:</b> Media, mediana, rango, cuartiles, varianza y desviación estándar.</li>
+        </ul>
+        <h4 style="color:#0B3D91;">Para entender más el tema mira este video explicativo 👇</h4>
+        <a href="https://youtu.be/nCszHELuwxk" target="_blank">
+          <img src="https://img.youtube.com/vi/nCszHELuwxk/hqdefault.jpg" alt="Ver video"
+            style="width:100%; border-radius:12px;">
+        </a>
+      </div>
+    </section>
+    <section id="atipicos" class="section">
+      <header>
+        <h2>Estadística con gráfica considerando valores atípicos</h2>
+      </header>
+      <div class="content">
+        <ul class="list">
+          <li><b>Detección:</b> Cajas y bigotes (regla de 1.5 IQR), z-scores, inspección de dispersión.</li>
+          <li><b>Impacto:</b> Distorsionan la media y la escala de gráficas; mediana y IQR son más robustos.</li>
+          <li><b>Manejo:</b> Verificar errores, justificar exclusión, usar transformaciones o métodos robustos.</li>
+        </ul>
+      </div>
+    </section>
+    <section id="simpson" class="section">
+      <header>
+        <h2>Paradoja de Simpson</h2>
+      </header>
+      <div class="content">
+        <p>Una tendencia observable en subgrupos puede invertirse al combinar los datos por efecto de una variable de
+          confusión.</p>
+        <ul class="list">
+          <li><b>Clave:</b> Analizar por estratos relevantes antes de concluir.</li>
+          <li><b>Diagnóstico:</b> Comparar tasas por grupos y global.</li>
+        </ul>
+      </div>
+    </section>
+    <section id="muestreo" class="section">
+      <header>
+        <h2>Imposibilidad, técnica de muestreo y aleatoriedad</h2>
+      </header>
+      <div class="content">
+        <ul class="list">
+          <li><b>Imposibilidad:</b> Eventos con probabilidad 0 en el modelo (o empíricamente no observables).</li>
+          <li><b>Muestreo:</b> Aleatorio simple, estratificado, por conglomerados y sistemático.</li>
+          <li><b>Aleatoriedad:</b> Selección imparcial; clave para inferencias válidas.</li>
+        </ul>
+      </div>
+    </section>
+    <section id="frecuencia" class="section">
+      <header>
+        <h2>Tabla de frecuencia, absoluta y relativa</h2>
+      </header>
+      <div class="content">
+        <ul class="list">
+          <li><b>Absoluta:</b> Número de ocurrencias por categoría o clase.</li>
+          <li><b>Relativa:</b> Proporción respecto del total (entre 0 y 1 o %).</li>
+          <li><b>Acumulada:</b> Suma progresiva para entender distribución hasta un punto.</li>
+        </ul>
+      </div>
+    </section>
+    <section id="condicional" class="section">
+      <header>
+        <h2>Probabilidad condicional</h2>
+      </header>
+      <div class="content">
+        <p>Probabilidad de un evento dado que ocurrió otro: <code>P(A|B) = P(A ∩ B) / P(B)</code>, si
+          <code>P(B) &gt; 0</code>.
+        </p>
+        <ul class="list">
+          <li><b>Interpretación:</b> Actualiza creencias con información parcial.</li>
+          <li><b>Independencia:</b> Si <code>P(A|B) = P(A)</code>, entonces A y B son independientes.</li>
+        </ul>
+        <h4 style="color:#0B3D91;">Para entender más el tema mira este video explicativo 👇</h4>
+        <a href="https://youtu.be/pko0dqQidnI" target="_blank">
+          <img src="https://img.youtube.com/vi/pko0dqQidnI/hqdefault.jpg" alt="Ver video"
+            style="width:100%; border-radius:12px;">
+        </a>
+      </div>
+    </section>
+    <section id="factorial" class="section">
+      <header>
+        <h2>Factorial</h2>
+      </header>
+      <div class="content">
+        <p>Producto de enteros positivos hasta <code>n</code>: <code>n! = n × (n−1) × … × 1</code>, con
+          <code>0! = 1</code>.
+        </p>
+        <ul class="list">
+          <li><b>Uso:</b> Permutaciones y conteo de ordenaciones.</li>
+          <li><b>Crecimiento:</b> Aumenta muy rápido; usar aproximaciones (Stirling) en cálculos grandes.</li>
+        </ul>
+      </div>
+    </section>
+    <section id="producto" class="section">
+      <header>
+        <h2>Regla de producto</h2>
+      </header>
+      <div class="content">
+        <p>Si un proceso tiene <code>m</code> opciones y otro sucesivo tiene <code>n</code> opciones, el total es
+          <code>m × n</code>.
+        </p>
+        <ul class="list">
+          <li><b>Aplicación:</b> Construir casos por etapas (p.ej., elegir contraseña: caracteres × posiciones).</li>
+          <li><b>Extensión:</b> Para varias etapas independientes, multiplicar opciones de cada etapa.</li>
+        </ul>
+      </div>
+              <!-- Botón para ir a la página cuetionario de mate -->
+<a class="btn" href="CuestiMate.html">Cuestionario de Matemáticas
+</a>  <!-- Botón para ir a la página cuetionario de mate -->
+<a class="btn" href="index.html">Volver al Inicio
+</a>
+    </section>
+    
+    <footer>
+      <p>© 2025 — Temario de Matemáticas. Construido para estudio y referencia .</p>
+    </footer>
+   
+  </main>
+  <script>
+  const links = document.querySelectorAll("nav a");
+  const HEADER_OFFSET = 170; // ajustado a tu header
+
+  links.forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+
+      const id = link.getAttribute("href");
+      const section = document.querySelector(id);
+      if (!section) return;
+
+      const top =
+        section.getBoundingClientRect().top +
+        window.pageYOffset -
+        HEADER_OFFSET;
+
+      window.scrollTo({
+        top,
+        behavior: "smooth"
+      });
+
+      const title = section.querySelector("h2");
+      if (title) {
+        title.classList.remove("rebote");
+        void title.offsetWidth; // reinicia animación
+        title.classList.add("rebote");
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
