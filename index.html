@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Cecytem</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background: linear-gradient(135deg, #0a1744, #1e3a8a);
+      color: #fff;
+    }
+
+    /* Menú de navegación */
+    nav {
+      background: #0d1a6b;
+      padding: 15px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      flex-wrap: wrap;
+      /* RESPONSIVE */
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    h1 {
+      margin-top: 90px;
+      font-size: 3em;
+    }
+
+    .info {
+      margin-bottom: 20px;
+      font-size: 1.2em;
+    }
+
+    /* GRID RESPONSIVE */
+    .container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: linear-gradient(145deg, #0d1a6b, #1e3a8a);
+      padding: 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    section {
+      padding: 50px 20px;
+    }
+
+    iframe {
+      width: 100%;
+      /* RESPONSIVE MAPA */
+      max-width: 600px;
+      height: 300px;
+      border-radius: 10px;
+    }
+
+    /* 📱 CELULARES */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2em;
+      }
+
+      .container {
+        grid-template-columns: 1fr;
+        /* 1 tarjeta por fila */
+      }
+
+      nav {
+        gap: 15px;
+      }
+    }
+
+    /* 💻 TABLET */
+    @media (max-width: 1024px) {
+      .container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .slider {
+  max-width: 800px;
+  margin: 30px auto;
+  overflow: hidden;
+  border-radius: 15px;
+  position: relative;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.4s ease;
+}
+
+.slides img {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+/* Puntitos */
+.dots {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  margin: 5px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot.active {
+  background-color: white;
+}
+.footer {
+  background: #0d1a6b;
+  color: white;
+  padding: 30px 20px;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.footer h3 {
+  margin-bottom: 15px;
+  color: #ffd700;
+}
+
+.footer p {
+  margin: 5px 0;
+  font-size: 0.95em;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer {
+    font-size: 0.9em;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="#ubicacion"><h2>Ubicación</h2></a>
+    <a href="#materias"><h2>Materias</h2></a>
+  </nav>
+
+  <h1><b>CECYTEM CUAUTITLAN</b></h1>
+<h3><b>Colegio de Estudios Científicos y Tecnológicos del Estado de México</b></h3>
+
+  <div class="info">
+    <span id="hora"></span> | Visitantes: <span id="visitantes"></span>
+  </div>
+<div class="slider" id="slider">
+  <div class="slides">
+    <img src="img1.jpg">
+    <img src="img2.jpeg">
+    <img src="img3.jpeg">
+  </div>
+
+  <div class="dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+</div>
+
+
+  <section id="materias">
+    <h2>Materias</h2>
+    <div class="container">
+      <div class="card" onclick="goTo('Mate.html')">
+        <h2>Matemáticas</h2>
+        <p>Aprende Estadística, probabilidad y más.</p>
+      </div>
+      <div class="card" onclick="goTo('Cultura.html')">
+        <h2>Cultura Digital</h2>
+        <p>Explora la cultura digital.</p>
+      </div>
+      <div class="card" onclick="goTo('Humanidades.html')">
+        <h2>Humanidades</h2>
+        <p>Cómo nuestras ideas y valores influyen en la sociedad.</p>
+      </div>
+      <div class="card" onclick="goTo('Recursos.html')">
+        <h2>Recursos Socioemocionales</h2>
+        <p>La empatía,capacidad de tomar decisiones en la vida diaria.</p>
+      </div>
+      <div class="card" onclick="goTo('Codifica.html')">
+        <h2>Codifica</h2>
+        <p>Utilizamos Java para desarrollar programas aplicando variables, condiciones, bucles y lógica</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ubicacion">
+    <h2>Ubicación</h2>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7513.316045850189!2d-99.162613!3d19.68459!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f5138bca2bc7%3A0x34b8cce11413be58!2sCECYTEM%20CUAUTITLAN!5e0!3m2!1ses-419!2sus!4v1765390533771!5m2!1ses-419!2sus"
+      width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  </section>
+
+  <footer class="footer">
+  <h3>Contacto</h3>
+  <p>📍 CECYTEM Cuautitlán</p>
+  <p>📞 Teléfono: 55 20 64 62 19</p>
+  <p>✉️ Correo: plantel.cuautitlan@cecytem.mx</p>
+  <p>© 2026 CECYTEM Cuautitlán</p>
+</footer>
+
+  <script>
+    function mostrarHora() {
+      document.getElementById("hora").textContent =
+        "Hora actual: " + new Date().toLocaleTimeString();
+    }
+    setInterval(mostrarHora, 1000);
+
+    function contarVisitantes() {
+      let v = localStorage.getItem("contadorVisitas") || 0;
+      v++;
+      localStorage.setItem("contadorVisitas", v);
+      document.getElementById("visitantes").textContent = v;
+    }
+    contarVisitantes();
+
+    function goTo(page) {
+      window.location.href = page;
+    } 
+    
+  const slides = document.querySelector(".slides");
+  const dots = document.querySelectorAll(".dot");
+  let index = 0;
+
+  function actualizarSlider() {
+    slides.style.transform = `translateX(-${index * 100}%)`;
+    dots.forEach(dot => dot.classList.remove("active"));
+    dots[index].classList.add("active");
+  }
+
+  /* 🔄 AUTOMÁTICO */
+  let intervalo = setInterval(() => {
+    index++;
+    if (index >= dots.length) index = 0;
+    actualizarSlider();
+  }, 3000); // cambia cada 3 segundos
+
+  /* 📱 DESLIZAR CON EL DEDO */
+  let startX = 0;
+
+  slides.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+    clearInterval(intervalo); // pausa al tocar
+  });
+
+  slides.addEventListener("touchend", e => {
+    let endX = e.changedTouches[0].clientX;
+    let diff = startX - endX;
+
+    if (diff > 50) index++;
+    if (diff < -50) index--;
+
+    if (index < 0) index = dots.length - 1;
+    if (index >= dots.length) index = 0;
+
+    actualizarSlider();
+
+    /* vuelve a iniciar el automático */
+    intervalo = setInterval(() => {
+      index++;
+      if (index >= dots.length) index = 0;
+      actualizarSlider();
+    }, 3000);
+  });
+
+
+  </script>
+</body>
+
+</html>
