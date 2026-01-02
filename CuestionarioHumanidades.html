@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cuestionario de Filosofía</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #0a1f44;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            animation: slideUp 1s ease-in-out;
+        }
+
+        .question {
+            background: #f4f4f4;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .question h3 {
+            color: #0a1f44;
+        }
+
+        label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+
+        button {
+            background-color: #0a1f44;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #123b7a;
+            transform: scale(1.05);
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-size: 20px;
+            text-align: center;
+            color: #0a1f44;
+            font-weight: bold;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+         .btn-volver {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #0b2a4a; /* azul marino */
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.btn-volver:hover {
+  background-color: #134a7c;
+}
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Cuestionario de Filosofía</h1>
+        <p>Selecciona la respuesta correcta</p>
+    </header>
+
+    <div class="container" id="quiz"></div>
+
+    <div class="container" style="text-align:center;">
+        <button onclick="calificar()">Calificar</button><a href="Humanidades.html" class="btn-volver">Volver </a><!-- Botón para ir a la página cuetionario de mate -->
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        const preguntas = [
+            { q: "¿Qué busca comprender la filosofía?", o: ["La realidad y la verdad", "Solo hechos científicos", "Solo religión"], a: 0 },
+            { q: "La filosofía se basa principalmente en:", o: ["Memorización", "Reflexión y razonamiento", "Experimentos"], a: 1 },
+            { q: "¿Qué desarrolla el estudio de la filosofía?", o: ["Pensamiento crítico", "Fuerza física", "Memoria mecánica"], a: 0 },
+            { q: "La doxa significa:", o: ["Verdad absoluta", "Opinión o creencia común", "Conocimiento científico"], a: 1 },
+            { q: "La doxa se acepta generalmente sin:", o: ["Personas", "Análisis profundo", "Opiniones"], a: 1 },
+            { q: "La doxa se contrapone a:", o: ["La fe", "El conocimiento verdadero", "La ética"], a: 1 },
+            { q: "¿Qué estudia la metafísica?", o: ["La realidad y la existencia", "El poder", "La conducta"], a: 0 },
+            { q: "La ética analiza:", o: ["La política", "Lo bueno y lo malo", "La naturaleza"], a: 1 },
+            { q: "La epistemología reflexiona sobre:", o: ["El conocimiento", "La sociedad", "La religión"], a: 0 },
+            { q: "La lógica se enfoca en:", o: ["Sentimientos", "Razonamiento correcto", "Opiniones"], a: 1 },
+            { q: "La filosofía política estudia:", o: ["El arte", "El Estado y la sociedad", "La biología"], a: 1 },
+            { q: "El Anticristo es una figura que:", o: ["Sigue a Cristo", "Se opone a Cristo", "Representa la ciencia"], a: 1 },
+            { q: "El Anticristo simboliza:", o: ["Verdad", "Engaño y corrupción moral", "Justicia"], a: 1 },
+            { q: "Un juramento es:", o: ["Una promesa solemne", "Una opinión", "Una creencia"], a: 0 },
+            { q: "El juramento tiene un valor:", o: ["Solo legal", "Moral y social", "Económico"], a: 1 },
+            { q: "Aristóteles fue discípulo de:", o: ["Sócrates", "Platón", "Epicuro"], a: 1 },
+            { q: "Para Aristóteles, el conocimiento proviene de:", o: ["La fe", "La observación y experiencia", "La imaginación"], a: 1 },
+            { q: "El fin del ser humano para Aristóteles es:", o: ["La felicidad", "El poder", "La riqueza"], a: 0 },
+            { q: "Sócrates enseñaba mediante:", o: ["Libros", "Diálogo y preguntas", "Castigos"], a: 1 },
+            { q: "Sócrates defendía la importancia de:", o: ["Conocerse a uno mismo", "Tener autoridad", "Obedecer sin pensar"], a: 0 }
+        ];
+
+        const quiz = document.getElementById("quiz");
+
+        preguntas.forEach((p, i) => {
+            let html = `<div class="question">
+      <h3>${i + 1}. ${p.q}</h3>`;
+            p.o.forEach((op, j) => {
+                html += `
+        <label>
+          <input type="radio" name="q${i}" value="${j}">
+          ${op}
+        </label>`;
+            });
+            html += "</div>";
+            quiz.innerHTML += html;
+        });
+
+        function calificar() {
+            let score = 0;
+            preguntas.forEach((p, i) => {
+                const r = document.querySelector(`input[name="q${i}"]:checked`);
+                if (r && parseInt(r.value) === p.a) score++;
+            });
+            document.getElementById("result").innerText =
+                `Obtuviste ${score} de 20 respuestas correctas`;
+        }
+    </script>
+
+</body>
+
+</html>
