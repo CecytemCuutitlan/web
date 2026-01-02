@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cultura Digital</title>
+
+  <style>
+    :root{
+      --azul-menu: #0B3D91;     /* Azul rey para menú y botones */
+      --azul-contenido: #113A78;/* Azul profundo que combina con el menú */
+      --blanco: #FFFFFF;
+      --gris-fondo: #F4F6FA;
+      --gris-suave: #E8ECF4;
+      --max-width: 1200px;
+    }
+
+    /* Reset básico */
+    *{ box-sizing: border-box; }
+    html{ scroll-behavior: smooth; }
+    body{
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: var(--gris-fondo);
+      color: var(--blanco);
+    }
+
+    /* Layout principal */
+    .layout{
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+    }
+
+    /* Menú lateral */
+    .sidebar{
+      background: var(--azul-menu);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      border-right: 3px solid #082B68;
+    }
+    .brand{
+      padding: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+    .nav{
+      overflow-y: auto;         /* Deslizable/scroll */
+      padding: 12px 8px 24px;
+    }
+    .nav a{
+      display: block;
+      text-decoration: none;
+      color: var(--blanco);
+      background: transparent;
+      padding: 10px 14px;
+      margin: 6px 8px;
+      border-radius: 8px;
+      transition: background 0.2s ease, transform 0.08s ease;
+      font-size: 0.96rem;
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .nav a:hover{
+      background: rgba(255,255,255,0.12);
+      transform: translateX(2px);
+    }
+    .nav a.active{
+      background: rgba(255,255,255,0.20);
+    }
+
+    /* Contenido */
+    .content{
+      background: var(--azul-contenido);
+      padding: 28px;
+    }
+    .container{
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    header.page-header{
+      margin-bottom: 14px;
+    }
+    header.page-header h1{
+      margin: 0 0 6px;
+      font-size: 1.8rem;
+    }
+    header.page-header p{
+      margin: 0;
+      opacity: 0.9;
+    }
+
+    /* Secciones */
+    section{
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 12px;
+      padding: 18px;
+      margin: 18px 0;
+      backdrop-filter: blur(4px);
+    }
+    section h2{
+      margin: 0 0 10px;
+      font-size: 1.35rem;
+      border-bottom: 1px solid rgba(255,255,255,0.18);
+      padding-bottom: 8px;
+    }
+    section p{
+      line-height: 1.55;
+      margin: 8px 0;
+      opacity: 0.95;
+    }
+
+    /* Listas con etiquetas en negrita */
+    ul, ol{ margin: 8px 0 6px 18px; }
+    li{ margin: 6px 0; }
+    li b{ font-weight: 700; }
+
+    /* Botones */
+    .btn{
+      display: inline-block;
+      background: var(--azul-menu);
+      color: var(--blanco);
+      border: none;
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin: 8px 8px 0 0;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.08s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    }
+    .btn:hover{ transform: translateY(-1px); }
+    .btn:active{ transform: translateY(0); }
+
+    /* Bloques de código (para pseudo, C++) */
+    pre{
+      background: #0E2E62;
+      color: #EAF2FF;
+      padding: 14px;
+      border-radius: 10px;
+      overflow: auto;
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    code{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+
+    /* Tabla simple */
+    table{
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    th, td{
+      padding: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.18);
+    }
+    th{ text-align: left; }
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .layout{
+        grid-template-columns: 1fr;
+      }
+      .sidebar{
+        position: relative;
+        height: auto;
+      }
+      .nav{ max-height: 40vh; }
+    }
+    #btn-arriba {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: #2563eb; /* azul bonito */
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  display: none;
+  z-index: 100;
+  box-shadow: 0 10px 20px rgba(0,0,0,.3);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+#btn-arriba:hover {
+  background: #1d4ed8;
+  transform: translateY(-4px);
+}
+video {
+  width: 100%;
+  max-width: 200px;
+  margin-top: 20px;
+  border-radius: 12px;
+}
+
+
+  </style>
+</head>
+
+<body>
+  <div class="layout">
+    <!-- Menú lateral (izquierda, deslizable) -->
+    <aside class="sidebar">
+      <div class="brand">Cultura Digital</div>
+      <nav class="nav" id="menu">
+        <a href="#cultura-digital">1. ¿Qué es cultura digital?</a>
+        <a href="#ciudadano-digital">2. ¿Qué es un ciudadano digital?</a>
+        <a href="#identidad-digital">3. ¿Qué es una identidad digital?</a>
+        <a href="#internet-web">4. Internet y web</a>
+        <a href="#seguridad-web">5. Seguridad en la web</a>
+        <a href="#protegerse-internet">6. ¿Cómo protegerse en internet?</a>
+        <a href="#estafas-online">7. Tipos de estafas en internet</a>
+        <a href="#cookies-que-son">8. ¿Qué es una cookie?</a>
+        <a href="#cookies-tipos">9. Tipos de cookies</a>
+        <a href="#criterios-busqueda">10. Criterios de búsqueda</a>
+        <a href="#herramientas-digitales">11. Herramientas digitales</a>
+        <a href="#partes-word">12. Partes de Word</a>
+        <a href="#algoritmos-diagramas">13. Algoritmos y diagramas de flujo</a>
+        <a href="#excel">14. Excel</a>
+        <a href="#pseint-seudocodigo">15. Pseudocódigo en PSeInt</a>
+        <a href="#intro-cpp">16. Introducción a C++</a>
+        <!-- Botón para ir a la página principal -->
+<a class="btn" href="index.html">Volver al Inicio
+</a>
+      </nav>
+    </aside>
+
+    <!-- Contenido principal con azul que combina -->
+    <main class="content">
+      <div class="container">
+        <header class="page-header">
+          <h1>Cultura Digital </h1>
+          <p>Conceptos clave, buenas prácticas y herramientas para moverte con confianza en el mundo digital.</p>
+        </header>
+
+        <section id="cultura-digital">
+          <h2>🛜¿Qué es cultura digital?</h2>
+          <p>La cultura digital es el conjunto de conocimientos, hábitos, valores y prácticas que surgen del uso de tecnologías conectadas. Abarca cómo aprendemos, trabajamos, nos comunicamos y creamos en entornos online. Implica competencias técnicas, pensamiento crítico y ética en la interacción con información y personas.</p>
+        </section>
+
+        <section id="ciudadano-digital">
+          <h2>¿Qué es un ciudadano digital?</h2>
+          <p>Es la persona que participa activamente en espacios digitales de forma responsable, legal y empática. Conoce sus derechos y deberes en línea, respeta normas de convivencia y cuida su seguridad y la de otros. También contribuye a comunidades con contenido útil y conductas respetuosas.</p>
+        </section>
+
+        <section id="identidad-digital">
+          <h2>👣¿Qué es una identidad digital?</h2>
+          <p>Tu identidad digital es el conjunto de datos, perfiles, huellas y reputación que te representan en internet. Incluye nombre de usuario, publicaciones, fotos, historial de actividad y permisos. Gestionarla bien significa controlar privacidad, coherencia y seguridad en lo que compartes.</p>
+        </section>
+
+        <section id="internet-web">
+          <h2>🤳Internet y web</h2>
+          <ul>
+            <li><b>Internet:</b> Red global de redes que permite el intercambio de datos entre dispositivos.</li>
+            <li><b>Web (WWW):</b> Sistema de páginas enlazadas que se acceden mediante navegadores usando HTTP/HTTPS.</li>
+            <li><b>Diferencia clave:</b> Internet es la infraestructura; la web es uno de sus servicios, junto con email, FTP, streaming, etc.</li>
+          </ul>
+        </section>
+
+        <section id="seguridad-web">
+          <h2>🔐Seguridad en la web</h2>
+          <ul>
+            <li><b>Confidencialidad:</b> Proteger que solo quien debe pueda ver la información.</li>
+            <li><b>Integridad:</b> Evitar alteraciones no autorizadas.</li>
+            <li><b>Disponibilidad:</b> Asegurar acceso cuando se necesita.</li>
+            <li><b>Autenticación y cifrado:</b> Verificar identidad y proteger datos en tránsito (HTTPS, 2FA).</li>
+          </ul>
+        </section>
+
+        <section id="protegerse-internet">
+          <h2>🛡️¿Cómo protegerse en internet?</h2>
+          <ul>
+            <li><b>Contraseñas robustas:</b> Frases largas, únicas, y gestor de contraseñas.</li>
+            <li><b>Autenticación en dos pasos:</b> Activa 2FA con app o llave física.</li>
+            <li><b>Actualizaciones:</b> Mantén sistema, apps y navegador al día.</li>
+            <li><b>Verifica enlaces:</b> Revisa el dominio y certificado antes de ingresar datos.</li>
+            <li><b>Privacidad:</b> Ajusta permisos en redes sociales y apps.</li>
+            <li><b>Copias de seguridad:</b> Respaldos periódicos en nube cifrada o disco externo.</li>
+          </ul>
+        </section>
+
+        <section id="estafas-online">
+          <h2>Tipos de estafas en internet</h2>
+          <ul>
+            <li><b>📩Phishing:</b> Emails o mensajes falsos que imitan marcas para robar credenciales.</li>
+            <li><b>🫵Spear phishing:</b> Ataques personalizados con datos sobre ti.</li>
+            <li><b>📞Smishing/Vishing:</b> Fraudes por SMS o llamadas.</li>
+            <li><b>🖥️Malware y adware:</b> Software que roba, cifra o espía.</li>
+            <li><b>💳Tiendas falsas:</b> Sitios que no entregan productos o clonan pagos.</li>
+            <li><b>💰Criptoscams:</b> Promesas de inversión irreal o “doblar” dinero.</li>
+          </ul>
+          <a class="btn" href="#protegerse-internet">Ver cómo evitar estafas</a>
+        </section>
+
+       <section id="cookies-que-son">
+  <h2>¿Qué es una cookie? 🍪</h2>
+  <p>
+    Una cookie es un archivo pequeño que un sitio web guarda en tu navegador
+    para recordar información sobre tu visita.
+  </p>
+
+  <video controls>
+    <source src="video/cookies.mp4" type="video/mp4">
+    Tu navegador no soporta videos.
+  </video>
+</section>
+
+
+        <section id="cookies-tipos">
+          <h2>Tipos de cookies</h2>
+          <ul>
+            <li><b>Esenciales:</b> Necesarias para funciones básicas (inicio de sesión, carrito).</li>
+            <li><b>De preferencias:</b> Guardan idioma, tema y configuraciones.</li>
+            <li><b>Analíticas:</b> Miden tráfico y rendimiento del sitio.</li>
+            <li><b>Publicidad:</b> Personalizan anuncios según tu actividad.</li>
+            <li><b>De terceros:</b> Colocadas por servicios externos (maps, videos, ads).</li>
+          </ul>
+        </section>
+
+        <section id="criterios-busqueda">
+          <h2>🕵️Criterios de búsqueda</h2>
+          <ul>
+            <li><b>Palabras clave:</b> Usa términos específicos y sinónimos.</li>
+            <li><b>Operadores:</b> "comillas", AND, OR, -, site:, filetype:, intitle: para afinar resultados.</li>
+            <li><b>Evaluación:</b> Verifica autoría, fecha, fuentes y sesgos.</li>
+            <li><b>Fuentes confiables:</b> Académicas, gubernamentales, organizaciones reconocidas.</li>
+          </ul>
+        </section>
+
+        <section id="herramientas-digitales">
+          <h2>Herramientas digitales</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Categoría</th>
+                <th>Ejemplos</th>
+                <th>Uso principal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Productividad</td>
+                <td>Google Workspace, Microsoft 365</td>
+                <td>Documentos, hojas, presentaciones y colaboración</td>
+              </tr>
+              <tr>
+                <td>Comunicación</td>
+                <td>Teams, Slack, Zoom</td>
+                <td>Mensajería y videollamadas</td>
+              </tr>
+              <tr>
+                <td>Gestión de tareas</td>
+                <td>Trello, Asana, Notion</td>
+                <td>Planificación y seguimiento de proyectos</td>
+              </tr>
+              <tr>
+                <td>Diseño</td>
+                <td>Figma, Canva</td>
+                <td>Prototipos y gráficos</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="partes-word">
+          <h2>Partes de Word</h2>
+          <ul>
+            <li><b>Cinta de opciones:</b> Pestañas Inicio, Insertar, Diseño, Referencias, Revisar, Vista.</li>
+            <li><b>Barra de herramientas de acceso rápido:</b> Guardar, deshacer, rehacer.</li>
+            <li><b>Área de edición:</b> Donde escribes y das formato.</li>
+            <li><b>Reglas y márgenes:</b> Control de disposición del texto.</li>
+            <li><b>Panel de navegación:</b> Buscar y mover por títulos.</li>
+            <li><b>Barra de estado:</b> Palabras, idioma, zoom.</li>
+            <a href="https://youtu.be/oi9woh5hQz8?si=8l7NuY2rxUdwW1lD" target="_blank">
+  <h4 style="color:#0b1d3b;">
+   Mira este video explicativo para más👈
+</h4>
+</a>
+
+          </ul>
+        </section>
+
+        <section id="algoritmos-diagramas">
+          <h2>📄Algoritmos y diagramas de flujo</h2>
+          <p>Un algoritmo es una serie finita y ordenada de pasos para resolver un problema. Los diagramas de flujo representan esos pasos con símbolos como inicio/fin, proceso, decisión y flechas de conexión. Facilitan entender la lógica antes de programar.</p>
+        </section>
+
+        <section id="excel">
+          <h2>Excel</h2>
+          <ul>
+            <li><b>Libro y hojas:</b> Archivos con múltiples hojas de cálculo.</li>
+            <li><b>Celdas y rangos:</b> Intersección de filas y columnas.</li>
+            <li><b>Fórmulas:</b> =SUMA(), =PROMEDIO(), =SI(), =BUSCARV(), referencias absolutas y relativas.</li>
+            <li><b>Gráficos y tablas:</b> Visualizan tendencias y organizan datos.</li>
+            <li><b>Formato condicional:</b> Resalta valores según reglas.</li>
+          <a href="https://youtu.be/pDwZV7V7ECM?si=hCaIAasLP0zRlqSA" target="_blank">
+  <h4 style="color:#0b1d3b;">
+   Mira este video explicativo para más👈
+</h4>
+</a>
+          </ul>
+        </section>
+
+        <section id="pseint-seudocodigo">
+          <h2>Pseudocódigo en PSeInt</h2>
+          <p>PSeInt permite escribir seudocódigo estructurado para practicar lógica antes de un lenguaje real. Usa palabras clave como Definir, Leer, Escribir, Si, Mientras y Para.</p>
+          <pre><code>Algoritmo SumaDosNumeros
+  Definir a, b, suma Como Entero
+  Escribir "Ingresa a:"; Leer a
+  Escribir "Ingresa b:"; Leer b
+  suma &lt;- a + b
+  Escribir "Resultado:", suma
+FinAlgoritmo
+</code></pre>
+        </section>
+
+        <section id="intro-cpp">
+          <h2>Introducción a C++</h2>
+          <p>C++ es un lenguaje de propósito general, eficiente y flexible, con soporte para programación orientada a objetos y bajo nivel. Compila a código nativo y se usa en sistemas, juegos y aplicaciones de alto rendimiento.</p>
+          <pre><code>// Hola mundo en C++
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+  cout &lt;&lt; "Hola, mundo" &lt;&lt; endl;
+  return 0;
+}
+</code></pre>
+          <a class="btn" href="#algoritmos-diagramas">Ver diagramas de flujo</a>
+          <a class="btn" href="#pseint-seudocodigo">Ver pseudocódigo</a>
+        </section>
+
+        <section>
+          <h2>Recursos y acciones</h2>
+          <p>Explora las secciones desde el menú y usa los botones para saltar a contenido relacionado. Mantén tus prácticas de seguridad y revisa criterios de búsqueda para encontrar información confiable.</p>
+          <a class="btn" href="#seguridad-web">Buenas prácticas de seguridad</a>
+          <a class="btn" href="#criterios-busqueda">Mejorar búsquedas</a>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Resalta el enlace activo según la sección visible
+    const links = document.querySelectorAll('#menu a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const id = '#' + entry.target.id;
+        const link = document.querySelector(`#menu a[href="${id}"]`);
+        if(entry.isIntersecting){
+          links.forEach(l => l.classList.remove('active'));
+          if(link) link.classList.add('active');
+        }
+      });
+    }, { root: null, rootMargin: '0px 0px -60% 0px', threshold: 0.2 });
+
+    sections.forEach(sec => sec && observer.observe(sec));
+  </script>
+  <button id="btn-arriba" aria-label="Volver arriba">⬆</button>
+<script>
+  const btnArriba = document.getElementById("btn-arriba");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      btnArriba.style.display = "block";
+    } else {
+      btnArriba.style.display = "none";
+    }
+  });
+
+  btnArriba.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+</script>
+
+</body>
+</html>
