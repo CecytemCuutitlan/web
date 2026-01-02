@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cuestionario de Autoconocimiento</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #0a1f44;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      animation: fadeIn 1s ease-in;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+      animation: slideUp 1s ease-in-out;
+    }
+
+    .question {
+      background: #f9f9f9;
+      margin-bottom: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+
+    .question h3 {
+      color: #0a1f44;
+    }
+
+    label {
+      display: block;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+
+    button {
+      background-color: #0a1f44;
+      color: white;
+      border: none;
+      padding: 12px 22px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s, background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #123b7a;
+      transform: scale(1.05);
+    }
+
+    #resultado {
+      margin-top: 20px;
+      font-size: 20px;
+      text-align: center;
+      color: #0a1f44;
+      font-weight: bold;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .btn-volver {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #0b2a4a; /* azul marino */
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.btn-volver:hover {
+  background-color: #134a7c;
+}
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Cuestionario de Recursos Socioemocionales</h1>
+  <p>Selecciona la respuesta correcta</p>
+</header>
+
+<div class="container" id="quiz"></div>
+
+<div class="container" style="text-align:center;">
+  <button onclick="calificar()">Calificar</button> <a href="Recursos.html" class="btn-volver">Volver </a><!-- Botón para ir a la página cuetionario de mate -->
+
+  <div id="resultado"></div>
+</div>
+
+<script>
+  const preguntas = [
+    { q: "¿Qué representa la actividad 'La bandera de lo que soy'?", o: ["Resultados académicos", "Valores e identidad personal", "Opiniones externas", "Habilidades deportivas"], a: 1 },
+    { q: "La monofobia es:", o: ["Miedo al fracaso", "Miedo a estar solo", "Miedo a hablar", "Miedo a decidir"], a: 1 },
+    { q: "La monofobia se relaciona con:", o: ["Autonomía", "Dependencia emocional", "Independencia", "Creatividad"], a: 1 },
+    { q: "Reflexionar sobre lo que los demás piensan ayuda a:", o: ["Ignorar opiniones", "Construir autoestima", "Evitar relaciones", "Competir"], a: 1 },
+    { q: "Los talentos evidentes son:", o: ["Debilidades", "Habilidades naturales", "Opiniones", "Metas"], a: 1 },
+    { q: "Los talentos evidentes favorecen el desarrollo:", o: ["Solo personal", "Personal, académico y social", "Económico", "Físico"], a: 1 },
+    { q: "El proyecto de vida incluye metas a:", o: ["Corto plazo", "Largo plazo", "Mediano plazo", "Todas las anteriores"], a: 3 },
+    { q: "El proyecto de vida debe considerar:", o: ["Valores e intereses", "Opiniones externas", "Suerte", "Competencia"], a: 0 },
+    { q: "Las preferencias neurolingüísticas NO incluyen:", o: ["Visual", "Auditivo", "Kinestésico", "Emocional"], a: 3 },
+    { q: "Una persona visual aprende mejor con:", o: ["Imágenes", "Sonidos", "Movimiento", "Silencio"], a: 0 },
+    { q: "La inteligencia social permite:", o: ["Manipular", "Comprender a los demás", "Mandar", "Competir"], a: 1 },
+    { q: "La inteligencia social se basa en:", o: ["Empatía", "Autoridad", "Imposición", "Aislamiento"], a: 0 },
+    { q: "Resolver problemas implica:", o: ["Ignorar opciones", "Analizar situaciones", "Actuar sin pensar", "Copiar"], a: 1 },
+    { q: "Tomar decisiones responsables significa:", o: ["Elegir al azar", "Evaluar consecuencias", "Seguir a otros", "Evitar decidir"], a: 1 },
+    { q: "Las habilidades sociales incluyen:", o: ["Escucha activa", "Agresión", "Silencio", "Competencia"], a: 0 },
+    { q: "La comunicación asertiva se caracteriza por:", o: ["Gritar", "Respetar y expresar ideas", "Callar", "Imponer"], a: 1 },
+    { q: "Un argumento lógico se basa en:", o: ["Emociones", "Opiniones", "Razonamiento", "Autoridad"], a: 2 },
+    { q: "Un argumento emocional busca:", o: ["Convencer con datos", "Generar sentimientos", "Imponer", "Ordenar"], a: 1 },
+    { q: "Un argumento de autoridad se apoya en:", o: ["Experiencia o prestigio", "Sentimientos", "Opiniones propias", "Azar"], a: 0 },
+    { q: "Las partes de un argumento son:", o: ["Inicio y fin", "Tema y opinión", "Tesis, razones y conclusión", "Introducción y resumen"], a: 2 }
+  ];
+
+  const quiz = document.getElementById("quiz");
+
+  preguntas.forEach((p, i) => {
+    let html = `<div class="question">
+      <h3>${i + 1}. ${p.q}</h3>`;
+    p.o.forEach((op, j) => {
+      html += `
+        <label>
+          <input type="radio" name="q${i}" value="${j}">
+          ${op}
+        </label>`;
+    });
+    html += "</div>";
+    quiz.innerHTML += html;
+  });
+
+  function calificar() {
+    let puntaje = 0;
+    preguntas.forEach((p, i) => {
+      const r = document.querySelector(`input[name="q${i}"]:checked`);
+      if (r && parseInt(r.value) === p.a) puntaje++;
+    });
+
+    document.getElementById("resultado").innerText =
+      `Obtuviste ${puntaje} de 20 respuestas correctas`;
+  }
+</script>
+
+</body>
+</html>
