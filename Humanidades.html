@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Humanidades</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #f9fafc;
+      --text: #0c172d;
+      --muted: #9ca3af;
+      --accent: #22d3ee;
+      --accent2: #a78bfa;
+      --border: #1f2937;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, Arial, sans-serif;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: #1b3980;
+      padding: 6px 12px;
+      border-bottom: 1px solid #0b3e85;
+      overflow-x: auto;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px 20px;
+    }
+
+    h1 {
+      margin: 8px 0 10px;
+      font-size: 28px;
+    }
+
+    nav {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    nav a {
+      padding: 8px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #ffffff;
+      background-color: #003399;
+      transition: 0.2s;
+    }
+
+    nav a:hover {
+      background-color: #0055cc;
+    }
+
+    .section {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      margin: 18px 0;
+      background: var(--panel);
+    }
+
+    .section h2 {
+      margin: 0;
+      padding: 18px 20px;
+      font-size: 22px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .content {
+      padding: 16px 20px;
+      line-height: 1.55;
+    }
+
+    .list {
+      padding-left: 18px;
+    }
+
+    .list li {
+      margin: 8px 0;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 30px 20px;
+    }
+
+    /* Animación rebote */
+    .rebote {
+      animation: rebote 0.8s ease;
+    }
+
+    @keyframes rebote {
+      0% {
+        transform: translateY(40px);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
+
+      70% {
+        transform: translateY(6px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    .btn-volver {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #0b2a4a;
+      /* azul marino */
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .btn-volver:hover {
+      background-color: #134a7c;
+    }
+
+    a.info-link {
+      display: inline-block;
+      background-color: #0a1f44;
+      /* azul marino */
+      color: white;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      margin: 10px 0;
+    }
+
+    a.info-link:hover {
+      background-color: #123b7a;
+      transform: scale(1.05);
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #0a1f44;
+      /* azul marino */
+      color: white;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #123b7a;
+      transform: scale(1.08);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Humanidades</h1>
+      <nav>
+        <a href="#bandera">1. Estudio de la filosofía</a>
+        <a href="#monofobia">2. Tipos de filosofía</a>
+        <a href="#opinion">3. Doxa</a>
+        <a href="#talentos">4. Anti-Cristo</a>
+        <a href="#proyecto">5. Juramento/a>
+          <a href="#neurolinguistica">6. Aristóteles</a>
+          <a href="#inteligencia">7. Sócrates</a>
+
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <section id="bandera" class="section">
+      <h2> Estudio de la filosofía</h2>
+      <div class="content">
+        <p>La filosofía es una disciplina que busca comprender la realidad, el conoc
+          imiento, la verdad y la conducta humana mediante la reflexión y el razonami
+          ento. No se basa solo en hechos, sino en preguntas profundas como: ¿quiénes
+          somos?, ¿qué es la verdad?, ¿qué es lo correcto? Su estudio ayuda a desarrollar
+          el pensamie
+          nto crítico, la argumentación y la capacidad de analizar distintas ideas.</p>
+      </div>
+    </section>
+
+    <section id="monofobia" class="section">
+      <h2> Tipos de filosofía</h2>
+      <div class="content">
+        <p>La filosofía se divide en varias ramas según el tema que estudian:</p>
+        <ul>
+          <li>Metafísica: analiza la realidad y la existencia.</li>
+          <li>Ética: estudia lo bueno y lo malo del comportamiento humano.</li>
+          <li>Epistemología: reflexiona sobre el conocimiento y cómo se obtiene.</li>
+          <li>Lógica: se enfoca en el razonamiento correcto.</li>
+          <li>Filosofía política: analiza el poder, el Estado y la sociedad.
+            Cada tipo permite entender distintos aspectos de la vida y del pensamiento humano.</li>
+
+        </ul>
+
+        <img
+          src="https://th.bing.com/th/id/R.c80bbcdca8a72ef29b644ba74e193e6f?rik=TendtLdFM8cbBQ&pid=ImgRaw&r=0"
+          alt="Logo de Google" style="width:200px; border-radius:12px;">
+        <a class="info-link"
+          href="https://www.bing.com/ck/a?!&&p=9f04edb885a99066ffd6b10c3fa9c438ef387cf7b722e648afb2f2b9bf364cb4JmltdHM9MTc2Njc5MzYwMA&ptn=3&ver=2&hsh=4&fclid=39a2cfe8-48f1-6aa3-2bde-da2a49676b76&psq=Monofobia&u=a1aHR0cHM6Ly93d3cuYXBvbGxvaG9zcGl0YWxzLmNvbS9lcy9kaXNlYXNlcy1hbmQtY29uZGl0aW9ucy9tb25vcGhvYmlhLXN5bXB0b21zLWNhdXNlcy1jb21wbGljYXRpb24tYW5kLXRyZWF0bWVudA"
+          target="_blank">
+          Más Información👈
+        </a>
+
+      </div>
+    </section>
+
+    <section id="opinion" class="section">
+      <h2> Doxa</h2>
+      <div class="content">
+        <p>La doxa es una palabra griega que significa opinión o creencia común.
+          Se refiere a ideas que las personas aceptan sin un análisis
+          profundo ni pruebas sólidas. En filosofía, la doxa se contrapone al
+          conocimiento verdadero, ya que se b
+          asa más en costumbres, creencias populares o apariencias que en la razón.</p>
+      </div>
+    </section>
+
+    <section id="talentos" class="section">
+      <h2> Anti-Cristo</h2>
+      <div class="content">
+        <p>El concepto de Anticristo proviene del pensamiento religioso y se refiere
+          a una figura que se opone a Cristo o a sus enseñanzas. Simboliza el engaño,
+          la falsedad o la corrupción moral. En filosofía y humanidades, este término
+          también se analiza de forma simbólica,
+          como la representación de ideas contrarias a los valores éticos y espirituales.</p>
+      <img src="https://tse2.mm.bing.net/th/id/OIP.rGad_n7eO1rlvjb8ROnFhwHaMZ?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Logo de Google"
+          style="width:200px; border-radius:12px;">
+  <a class="info-link"
+          href="https://www.bing.com/ck/a?!&&p=f9ddfc337248a27fab23437918e0efae41f5dd36eb85f396222da22c216bf39aJmltdHM9MTc2Njk2NjQwMA&ptn=3&ver=2&hsh=4&fclid=39a2cfe8-48f1-6aa3-2bde-da2a49676b76&psq=el+anticristo+nietzsche+pdf&u=a1aHR0cHM6Ly9hcmNoaXZlLm9yZy9kb3dubG9hZC9mcmllZHJpY2gtbmlldHpzY2hlLWVsLWFudGljcmlzdG8vRnJpZWRyaWNoJTIwTmlldHpzY2hlJTJDJTIwRWwlMjBBbnRpY3Jpc3RvLnBkZg"
+          target="_blank">
+          Visitar Libro👈
+        </a>
+        </div>
+    </section>
+
+    <section id="proyecto" class="section">
+      <h2>Juramento</h2>
+      <div class="content">
+        <p>Un juramento es una promesa solemne que una persona hace
+          comprometiéndose a decir la verdad o cumplir una obligación.
+          Tiene un valor moral y social, ya que implica responsabilidad y honestidad.
+          En la filosofía, el juramento se relaciona con la ética y
+          el compromiso personal,
+          como el famoso Juramento Hipocrático en la medicina.</p>
+
+      </div>
+    </section>
+
+    <section id="neurolinguistica" class="section">
+      <h2>Aristóteles</h2>
+      <div class="content">
+        <p>Aristóteles fue un filósofo griego discípulo de Platón.
+          Sus ideas influyeron en la lógica, la ética, la política y la ciencia.
+          Consideraba que el conocimiento se obtiene a partir de la observación
+          y la experiencia. Para él, el objetivo del ser humano es alcanzar la
+          felicidad,
+          mediante la virtud y el equilibrio en las acciones.</p>
+        <a class="info-link"
+          href="https://www.bing.com/ck/a?!&&p=6c21e3793933367de1e9de91e98eebfd99b7f1b3f54b7f63f09011d90217cf4aJmltdHM9MTc2Njg4MDAwMA&ptn=3&ver=2&hsh=4&fclid=39a2cfe8-48f1-6aa3-2bde-da2a49676b76&psq=Preferencias+neuroling%c3%bc%c3%adsticas&u=a1aHR0cHM6Ly9lcy5zY3JpYmQuY29tL2RvY3VtZW50LzY0ODU4NzM5Ni9URVNULURFLVBSRUZFUkVOQ0lBUy1ORVVST0xJTkdVSVNUSUNBUy1QQVJBLUVEVUNBQ0lPTg"
+          target="_blank">
+          Más Información👈
+        </a>
+      </div>
+    </section>
+
+    <section id="inteligencia" class="section">
+      <h2>Sócrates</h2>
+      <div class="content">
+        <p>Sócrates fue un filósofo griego considerado uno de los fundadores de
+          la filosofía occidental. Enseñaba a través del diálogo y las preguntas,
+          método conocido como mayéutica, con el cual ayudaba a las personas a
+          reflexionar y descubrir la verdad por sí mismas. Defendía la idea de que
+          conocerse a uno mismo es esencial
+          para vivir de manera correcta y justa.</p>
+          <img src="https://tse3.mm.bing.net/th/id/OIP.jNaBw37znFXsJ8vLtEKFlQHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Logo de Google"
+          style="width:200px; border-radius:12px;">
+      </div>
+    </section>
+
+    <a href="index.html" class="btn-volver">Volver al inicio</a><!-- Botón para ir a la página cuetionario de mate -->
+    <a class="btn" href="CuestionarioHumanidades.html">Cuestionario de Humanidades
+    </a>
+
+    <footer>
+      <p>© 2025 — Humanidades</p>
+    </footer>
+
+  </main>
+  <script>
+    const links = document.querySelectorAll("nav a");
+    const HEADER_OFFSET = 170; // ajustado a tu header
+
+    links.forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+
+        const id = link.getAttribute("href");
+        const section = document.querySelector(id);
+        if (!section) return;
+
+        const top =
+          section.getBoundingClientRect().top +
+          window.pageYOffset -
+          HEADER_OFFSET;
+
+        window.scrollTo({
+          top,
+          behavior: "smooth"
+        });
+
+        const title = section.querySelector("h2");
+        if (title) {
+          title.classList.remove("rebote");
+          void title.offsetWidth; // reinicia animación
+          title.classList.add("rebote");
+        }
+      });
+    });
+  </script>
+
+</body>
+
+</html>
