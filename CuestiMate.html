@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cuestionario de Matemáticas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #0a1f44;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      animation: fadeIn 1.2s ease-in;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+      animation: slideUp 1s ease-in-out;
+    }
+
+    .question {
+      margin-bottom: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .question h3 {
+      color: #0a1f44;
+    }
+
+    label {
+      display: block;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+
+    button {
+      background: #0a1f44;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    button:hover {
+      background: #123b7a;
+      transform: scale(1.05);
+    }
+
+    #result {
+      font-size: 20px;
+      text-align: center;
+      margin-top: 20px;
+      color: #0a1f44;
+      font-weight: bold;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    @keyframes slideUp {
+      from {transform: translateY(30px); opacity: 0;}
+      to {transform: translateY(0); opacity: 1;}
+    }
+    .btn-volver {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #0b2a4a; /* azul marino */
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.btn-volver:hover {
+  background-color: #134a7c;
+}
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Cuestionario de Matemáticas</h1>
+  <p>Selecciona la respuesta correcta</p>
+</header>
+
+<div class="container" id="quiz"></div>
+
+<div class="container">
+  <button onclick="calificar()">Calificar</button><a href="Mate.html" class="btn-volver">Volver </a><!-- Botón para ir a la página cuetionario de mate -->
+  <div id="result"></div>
+</div>
+
+<script>
+  const preguntas = [
+    { q: "¿Qué estudia la estadística?", o: ["Datos", "Números aleatorios", "Gráficas", "Ecuaciones"], a: 0 },
+    { q: "¿Qué hace la estadística descriptiva?", o: ["Predice", "Resume datos", "Muestrea", "Calcula probabilidades"], a: 1 },
+    { q: "¿Qué hace la estadística inferencial?", o: ["Resume", "Ordena", "Extrae conclusiones", "Clasifica"], a: 2 },
+    { q: "¿Cuál es el primer paso del proceso estadístico?", o: ["Analizar", "Concluir", "Plantear pregunta", "Comunicar"], a: 2 },
+    { q: "La variabilidad describe:", o: ["Errores", "Cambios en los datos", "Promedios", "Probabilidades"], a: 1 },
+    { q: "Mayor variabilidad implica:", o: ["Menor incertidumbre", "Mayor certeza", "Mayor incertidumbre", "Independencia"], a: 2 },
+    { q: "¿Qué es equiprobabilidad?", o: ["Probabilidad 0", "Resultados iguales", "Eventos imposibles", "Errores"], a: 1 },
+    { q: "La hipótesis nula se representa como:", o: ["H1", "H0", "P(A)", "μ"], a: 1 },
+    { q: "La probabilidad toma valores entre:", o: ["-1 y 1", "0 y 1", "1 y 100", "0 y 100"], a: 1 },
+    { q: "La frecuencia relativa se aproxima a:", o: ["Moda", "Media", "Probabilidad", "Rango"], a: 2 },
+    { q: "La simulación se usa para:", o: ["Ordenar datos", "Estimar probabilidades", "Medir", "Clasificar"], a: 1 },
+    { q: "El principio aditivo se usa cuando:", o: ["Tareas sucesivas", "Eventos excluyentes", "Hay orden", "Hay repetición"], a: 1 },
+    { q: "Las combinaciones:", o: ["Importa el orden", "No importa el orden", "Siempre repiten", "Son factoriales"], a: 1 },
+    { q: "¿Qué actualiza el Teorema de Bayes?", o: ["Frecuencias", "Hipótesis", "Gráficas", "Tablas"], a: 1 },
+    { q: "Las gráficas de barras son:", o: ["Cuantitativas", "Continuas", "Cualitativas", "Discretas"], a: 2 },
+    { q: "Una variable nominal:", o: ["Tiene orden", "No tiene orden", "Es numérica", "Es continua"], a: 1 },
+    { q: "Las tablas de contingencia relacionan:", o: ["Dos variables categóricas", "Dos medias", "Dos rangos", "Dos gráficas"], a: 0 },
+    { q: "Un valor atípico afecta más a:", o: ["Mediana", "Moda", "Media", "IQR"], a: 2 },
+    { q: "La paradoja de Simpson ocurre por:", o: ["Error", "Azar", "Variable de confusión", "Mala gráfica"], a: 2 },
+    { q: "El factorial de 0 es:", o: ["0", "1", "Indefinido", "-1"], a: 1 }
+  ];
+
+  const quiz = document.getElementById("quiz");
+
+  preguntas.forEach((p, i) => {
+    let html = `<div class="question">
+      <h3>${i + 1}. ${p.q}</h3>`;
+    p.o.forEach((op, j) => {
+      html += `
+        <label>
+          <input type="radio" name="q${i}" value="${j}">
+          ${op}
+        </label>`;
+    });
+    html += "</div>";
+    quiz.innerHTML += html;
+  });
+
+  function calificar() {
+    let score = 0;
+    preguntas.forEach((p, i) => {
+      const r = document.querySelector(`input[name="q${i}"]:checked`);
+      if (r && parseInt(r.value) === p.a) score++;
+    });
+    document.getElementById("result").innerText =
+      `Obtuviste ${score} de 20 respuestas correctas`;
+  }
+</script>
+
+</body>
+</html>
