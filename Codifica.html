@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codifica</title>
+
+  <style>
+    :root {
+      --azul-menu: #0B3D91;
+      /* Azul rey para menú y botones */
+      --azul-contenido: #113A78;
+      /* Azul profundo que combina con el menú */
+      --blanco: #FFFFFF;
+      --gris-fondo: #F4F6FA;
+      --gris-suave: #E8ECF4;
+      --max-width: 1200px;
+    }
+
+    /* Reset básico */
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: var(--gris-fondo);
+      color: var(--blanco);
+    }
+
+    /* Layout principal */
+    .layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+    }
+
+    /* Menú lateral */
+    .sidebar {
+      background: var(--azul-menu);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      border-right: 3px solid #082B68;
+    }
+
+    .brand {
+      padding: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .nav {
+      overflow-y: auto;
+      /* Deslizable/scroll */
+      padding: 12px 8px 24px;
+    }
+
+    .nav a {
+      display: block;
+      text-decoration: none;
+      color: var(--blanco);
+      background: transparent;
+      padding: 10px 14px;
+      margin: 6px 8px;
+      border-radius: 8px;
+      transition: background 0.2s ease, transform 0.08s ease;
+      font-size: 0.96rem;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .nav a:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateX(2px);
+    }
+
+    .nav a.active {
+      background: rgba(255, 255, 255, 0.20);
+    }
+
+    /* Contenido */
+    .content {
+      background: var(--azul-contenido);
+      padding: 28px;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    header.page-header {
+      margin-bottom: 14px;
+    }
+
+    header.page-header h1 {
+      margin: 0 0 6px;
+      font-size: 1.8rem;
+    }
+
+    header.page-header p {
+      margin: 0;
+      opacity: 0.9;
+    }
+
+    /* Secciones */
+    section {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 12px;
+      padding: 18px;
+      margin: 18px 0;
+      backdrop-filter: blur(4px);
+    }
+
+    section h2 {
+      margin: 0 0 10px;
+      font-size: 1.35rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      padding-bottom: 8px;
+    }
+
+    section p {
+      line-height: 1.55;
+      margin: 8px 0;
+      opacity: 0.95;
+    }
+
+    /* Listas con etiquetas en negrita */
+    ul,
+    ol {
+      margin: 8px 0 6px 18px;
+    }
+
+    li {
+      margin: 6px 0;
+    }
+
+    li b {
+      font-weight: 700;
+    }
+
+    /* Botones */
+    .btn {
+      display: inline-block;
+      background: var(--azul-menu);
+      color: var(--blanco);
+      border: none;
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin: 8px 8px 0 0;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.08s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    /* Bloques de código (para pseudo, C++) */
+    pre {
+      background: #0E2E62;
+      color: #EAF2FF;
+      padding: 14px;
+      border-radius: 10px;
+      overflow: auto;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    /* Tabla simple */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    th,
+    td {
+      padding: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    th {
+      text-align: left;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: relative;
+        height: auto;
+      }
+
+      .nav {
+        max-height: 40vh;
+      }
+    }
+
+    #btn-arriba {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: none;
+      background: #2563eb;
+      /* azul bonito */
+      color: #fff;
+      font-size: 22px;
+      cursor: pointer;
+      display: none;
+      z-index: 100;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, .3);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    #btn-arriba:hover {
+      background: #1d4ed8;
+      transform: translateY(-4px);
+    }
+    .pdf-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 16px;
+  background: #1e3a8a;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.pdf-btn:hover {
+  background: #ffd700;
+  color: black;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="layout">
+    <!-- Menú lateral (izquierda, deslizable) -->
+    <aside class="sidebar">
+      <div class="brand">Codifica</div>
+      <nav class="nav" id="menu">
+        <a href="#cultura-digital">1.Programación Orientada a Objetos </a>
+        <a href="#ciudadano-digital">2. Clase,Objeto y Infancia </a>
+        <a href="#identidad-digital">3.Encapsulamiento, astracción</a>
+        <a href="#internet-web">4. Java y Netbeans (como instalarlo)</a>
+        <a href="#seguridad-web">5.Herencia y tipos de herencia</a>
+        <a href="#protegerse-internet">6.Polimorfismo y tipos de polimorfismo</a>
+        <a href="#estafas-online">7. Tipos de datos en java y cuáles son</a>
+        <a href="#cookies-que-son">8. Operadores en java</a>
+        <a href="#cookies-tipos">9. Condición en java </a>
+        <a href="#criterios-busqueda">10.Ciclo for</a>
+        <a href="#herramientas-digitales">11. ¿Qué es un IDE y que significan sus siglas?</a>
+        <a href="#partes-word">12.Diferencia entre primitivos y compuestos </a>
+        <a href="#algoritmos-diagramas">13.¿Qué es un acumulador? </a>
+        <a href="#excel">14.¿Qué es un contador? </a>
+        <a href="#pseint-seudocodigo">15.¿Qué es un bucle y cuáles son los mas usados en java ? </a>
+        <a href="#intro-cpp">16.Funciones en la clase mata, como son y como se implementa en java</a>
+        <a href="#gui">17.¿Qué es un GUI (interfaz grafica de usuario)?</a>
+        <a href="#mensaje">18.Formas de mostrar un mensaje </a>
+        <a href="#jar">19.¿Qué es un .jar?</a>
+        <!-- Botón para ir a la página principal -->
+        <a class="btn" href="index.html">Volver al Inicio
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Contenido principal con azul que combina -->
+    <main class="content">
+      <div class="container">
+        <header class="page-header">
+          <h1>Codifica </h1>
+          <p>Conceptos clave, buenas prácticas y herramientas para moverte con confianza en el mundo digital.</p>
+        </header>
+
+        <section id="cultura-digital">
+          <h2>Programación Orientada a Objetos</h2>
+          <p>Es un paradigma que organiza el código en objetos que combinan datos (atributos) y
+            comportamientos (métodos). Busca modelar el mundo real y
+            facilita la reutilización, mantenimiento y escalabilidad.</p>
+        </section>
+
+        <section id="ciudadano-digital">
+          <h2>Clase,Objeto e Instancia</h2>
+          <ul>
+            <li>Clase: plantilla que define atributos y métodos.</li>
+            <li>Objeto: representación concreta creada a partir de una clase.</li>
+            <li>Instancia: el proceso de crear un objeto a partir de una clase.</li>
+
+          </ul>
+        </section>
+
+        <section id="identidad-digital">
+          <h2>Encapsulamiento, astracción</h2>
+          <ul>
+            <li>Encapsulamiento: proteger los datos internos de un objeto, permitiendo acceso controlado mediante
+              métodos.</li>
+            <li>Abstracción: simplificar la complejidad mostrando solo lo esencial y ocultando detalles internos.</li>
+          </ul>
+        </section>
+
+        <section id="internet-web">
+          <h2>Java y Netbeans (como instalarlo)</h2>
+          <ul>
+            <li><b>Java:</b> lenguaje de programación orientado a objetos.</li>
+            <li><b>NetBeans:</b>IDE para desarrollar en Java.
+              Instalación: descargar el JDK desde Oracle, luego instalar NetBeans desde
+              su página oficial y c
+              onfigurarlo para que reconozca el JDK.
+            </li>
+
+          </ul>
+        </section>
+
+        <section id="seguridad-web">
+          <h2>Herencia y tipos de herencia</h2>
+          <p>Permite que una clase (hija) herede atributos y métodos de otra (padre).</p>
+          <ul>
+            <li><b>Simple:</b> una clase hereda de otra.</li>
+            <li><b>Múltiple (indirecta): </b> Java no permite herencia múltiple directa, pero sí mediante interfaces.
+            </li>
+            <li><b>Jerárquica: </b> varias clases heredan de una misma clase padre.</li>
+          </ul>
+        </section>
+
+        <section id="protegerse-internet">
+          <h2>Polimorfismo y tipos de polimorfismo</h2>
+          <p>Capacidad de un objeto de comportarse de distintas formas.</p>
+          <ul>
+            <li><b>Sobrecarga (compile-time): </b> varios métodos con el mismo nombre pero diferentes parámetros.</li>
+            <li><b>Sobreescritura (runtime):</b> redefinir un método heredado en la clase hija.</li>
+          </ul>
+        </section>
+
+        <section id="estafas-online">
+          <h2>Tipos de datos en java y cuáles son</h2>
+          <ul>
+            <li><b>Primitivos:</b> int, double, float, char, boolean, byte, short, long.</li>
+            <li><b>No primitivos (objetos): </b> String, Arrays, Clases creadas por el usuario.</li>
+          </ul>
+          <a class="btn" href="#criterios-busqueda">Ciclo for</a>
+        </section>
+
+        <section id="cookies-que-son">
+          <h2>Operadores en java </h2>
+          <ul>
+            <li><b>Aritméticos: </b> +, -, *, /, %</li>
+            <li><b>Relacionales: </b> ==, !=, >, <, >=, <=</li>
+            <li><b>Lógicos: </b> &&, ||, !</li>
+            <li><b>Asignación: </b>=, +=, -=, *=, /=</li>
+            <li><b>Incremento/Decremento:</b>++, --</li>
+
+          </ul>
+        </section>
+
+        <section id="cookies-tipos">
+          <h2>Condición en java </h2>
+  <table>
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Cuándo se usa</th>
+                <th>Ejemplo en Java</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>if</td>
+                <td>Cuando quieres ejecutar un bloque de código solo si una condición es verdadera</td>
+                <td>java if (x > 0) { System.out.println("Positivo"); }</td>
+              </tr>
+              <tr>
+                <td>if-else</td>
+                <td>Cuando necesitas ejecutar una acción si se cumple la condición y otra si no</td>
+                <td>java if (x % 2 == 0) { System.out.println("Par"); } else { System.out.println("Impar"); }</td>
+              </tr>
+              <tr>
+                <td>switch</td>
+                <td>Cuando tienes que comparar una variable contra varios valores fijos (más limpio que muchos else if)</td>
+                <td>java switch (dia) { case 1: System.out.println("Lunes"); break; case 2: System.out.println("Martes"); break; default: System.out.println("Otro día"); }</td>
+              </tr>
+              <tr>
+                <td>else if</td>
+                <td>Cuando hay múltiples condiciones posibles y quieres evaluarlas en orden</td>
+                <td>java if (x < 0) { System.out.println("Negativo"); } else if (x == 0) { System.out.println("Cero"); } else { System.out.println("Positivo"); }</td>
+              </tr>
+            </tbody>
+          </table>     
+             <!-- BOTÓN PDF -->
+  <a href="pdf/acumula.pdf" target="_blank" class="pdf-btn">
+    📄 Ver PDF
+  </a>
+</section>
+        </section>
+
+        <section id="criterios-busqueda">
+          <h2>Ciclo for</h2>
+          <p>Se usa para repetir un bloque de código un número determinado de veces. Tiene tres partes: inicialización, condición y actualización.</p>
+          <pre><code>for (int i = 0; i < 5; i++) {
+   System.out.println(i);
+}
+
+
+</code></pre>
+        </section>
+
+        <section id="herramientas-digitales">
+          <h2>¿Qué es un IDE y que significan sus siglas?</h2>
+        <p><b>IDE (Integrated Development Environment)</b> 
+Es un entorno de desarrollo integrado. Reúne editor de código, 
+compilador, depurador y herramientas en un solo programa 
+(ej: Eclipse, IntelliJ, NetBeans).</p>
+        </section>
+
+        <section id="partes-word">
+          <h2>Diferencia entre primitivos y compuestos</h2>
+          <ul>
+            <li><b>Primitivos: </b> tipos básicos como int, double, char, boolean. Guardan valores simples.</li>
+            <li><b>Compuestos (objetos): </b> creados a partir de clases, 
+              pueden contener métodos y atributos
+               (ej: String, ArrayList).</li>
+
+          </ul>
+        </section>
+
+        <section id="algoritmos-diagramas">
+          <h2>¿Qué es un acumulador? </h2>
+          <p>Variable que suma o acumula valores en cada iteración.</p>
+                    <pre><code>int suma = 0; for (int i = 1; i <= 5; i++) { suma += i; }
+
+
+</code></pre>
+<!-- BOTÓN PDF -->
+  <a href="pdf/prac3.pdf" target="_blank" class="pdf-btn">
+    📄 Ver PDF
+  </a>
+</section>
+        </section>
+
+        <section id="excel">
+          <h2>¿Qué es un contador?</h2>
+          <p>Variable que incrementa o disminuye para llevar registro de repeticiones.</p>
+        <pre><code>int contador = 0; for (int i = 0; i < 10; i++) { contador++; }
+</code></pre>
+        </section>
+
+        <section id="pseint-seudocodigo">
+          <h2>
+            ¿Qué es un bucle y cuáles son los mas usados en java ?</h2>
+          <p>Un bucle repite instrucciones mientras se cumpla una condición. Los más usados son:</p>
+            <ul>
+            <li><b>for </b>(repeticiones conocidas)</li>
+            <li><b>while  </b> (repite mientras la condición sea verdadera)</li>
+                           <li><b>do-while </b>(ejecuta al menos una vez antes de verificar condición).</li>
+          </ul>
+                    <a class="btn" href="#cookies-tipos">Condiciones en java</a>
+
+        </section>
+
+        <section id="intro-cpp">
+          <h2>Funciones en la clase mata, como son y como se implementa en java</h2>
+          <p>La clase Math ofrece métodos estáticos para operaciones matemáticas:</p>
+          <ul>
+            <li><b>Ejemplos: </b>Math.sqrt(9), Math.pow(2,3), Math.random().</li>
+          </ul>
+          <p>Se implementan llamando directamente:</p>
+
+          <pre><code>double raiz = Math.sqrt(16);
+</code></pre>
+        </section>
+
+        <section id="gui">
+          <h2>¿Qué es un GUI (interfaz grafica de usuario)?</h2>
+          <p><b>GUI (Graphical User Interface)  </b>Es la interfaz gráfica de usuario: ventanas, botone
+            s, menús. En Java se crean con librerías como Swing o JavaFX.</p>
+                  <a class="btn" href="#internet-web">Como instalar java</a>
+
+          </section>
+
+        <section id="mensaje">
+          <h2>Formas de mostrar un mensaje</h2>
+          <ul>
+            <li><b>Consola: </b>System.out.println("Hola");</li>
+            <li><b>Ventana emergente: </b>JOptionPane.showMessageDialog(null, "Hola");</li>
+          </ul>
+          <!-- BOTÓN PDF -->
+  <a href="pdf/mensaje.pdf" target="_blank" class="pdf-btn">
+    📄 Ver PDF
+  </a>
+        </section>
+        <section id="jar">
+          <h2>¿Qué es un .jar?</h2>
+          <p>Es un archivo Java ARchive. Contiene clases compiladas y recursos empaquetados para distribuir y ejecutar aplicaciones Java.</p>
+        </section>
+
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Resalta el enlace activo según la sección visible
+    const links = document.querySelectorAll('#menu a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const id = '#' + entry.target.id;
+        const link = document.querySelector(`#menu a[href="${id}"]`);
+        if (entry.isIntersecting) {
+          links.forEach(l => l.classList.remove('active'));
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { root: null, rootMargin: '0px 0px -60% 0px', threshold: 0.2 });
+
+    sections.forEach(sec => sec && observer.observe(sec));
+  </script>
+  <button id="btn-arriba" aria-label="Volver arriba">⬆</button>
+  <script>
+    const btnArriba = document.getElementById("btn-arriba");
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        btnArriba.style.display = "block";
+      } else {
+        btnArriba.style.display = "none";
+      }
+    });
+
+    btnArriba.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  </script>
+
+</body>
+
+</html>
