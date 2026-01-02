@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recursos Socioemocionales</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #f9fafc;
+      --text: #0c172d;
+      --muted: #9ca3af;
+      --accent: #22d3ee;
+      --accent2: #a78bfa;
+      --border: #1f2937;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, Arial, sans-serif;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: #1b3980;
+      padding: 6px 12px;
+      border-bottom: 1px solid #0b3e85;
+      overflow-x: auto;
+    }
+
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 16px 20px; }
+    h1 { margin: 8px 0 10px; font-size: 28px; }
+
+    nav {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    nav a {
+      padding: 8px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #ffffff;
+      background-color: #003399;
+      transition: 0.2s;
+    }
+
+    nav a:hover {
+      background-color: #0055cc;
+    }
+
+    .section {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      margin: 18px 0;
+      background: var(--panel);
+    }
+
+    .section h2 {
+      margin: 0;
+      padding: 18px 20px;
+      font-size: 22px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .content {
+      padding: 16px 20px;
+      line-height: 1.55;
+    }
+
+    .list {
+      padding-left: 18px;
+    }
+
+    .list li {
+      margin: 8px 0;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 30px 20px;
+    }
+    /* Animación rebote */
+.rebote {
+  animation: rebote 0.8s ease;
+}
+
+@keyframes rebote {
+  0%   { transform: translateY(40px); }
+  50%  { transform: translateY(-12px); }
+  70%  { transform: translateY(6px); }
+  100% { transform: translateY(0); }
+}
+.btn-volver {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #0b2a4a; /* azul marino */
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.btn-volver:hover {
+  background-color: #134a7c;
+}
+a.info-link {
+  display: inline-block;
+  background-color: #0a1f44; /* azul marino */
+  color: white;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin: 10px 0;
+}
+
+a.info-link:hover {
+  background-color: #123b7a;
+  transform: scale(1.05);
+}
+.btn {
+  display: inline-block;
+  background-color: #0a1f44; /* azul marino */
+  color: white;
+  text-decoration: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #123b7a;
+  transform: scale(1.08);
+}
+video {
+  width: 100%;
+  max-width: 200px;
+  margin: 20px auto;
+  display: block;
+  border-radius: 12px;
+}
+
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="wrap">
+    <h1>Recursos Socioemocionales</h1>
+    <nav>
+      <a href="#bandera">1. La bandera de lo que soy</a>
+      <a href="#monofobia">2. Monofobia</a>
+      <a href="#opinion">3. Lo que los demás piensan de mí</a>
+      <a href="#talentos">4. Talentos evidentes</a>
+      <a href="#proyecto">5. Proyecto de vida</a>
+      <a href="#neurolinguistica">6. Preferencias neurolingüísticas</a>
+      <a href="#inteligencia">7. Inteligencia social</a>
+      <a href="#decision">8. Resolución de problemas</a>
+      <a href="#habilidades">9. Habilidades sociales</a>
+      <a href="#argumentos">10. Tipos de argumentos</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section id="bandera" class="section">
+  <h2>La bandera de lo que soy</h2>
+  <div class="content">
+    <p>Actividad de autoconocimiento donde se representan valores, gustos, fortalezas y aspectos importantes de la identidad personal.</p>
+  </div>
+</section>
+
+<section id="monofobia" class="section">
+  <h2>Monofobia</h2>
+
+  <div class="content">
+    <p>
+      Es el miedo a estar solo. Se relaciona con la dependencia emocional
+      y la necesidad de aceptación social.
+    </p>
+
+    <!-- VIDEO -->
+    <video controls>
+      <source src="video/monofobia.mp4" type="video/mp4">
+      Tu navegador no soporta video.
+    </video>
+
+
+    <a class="info-link"
+       href="https://www.apollohospitals.com/es/diseases-and-conditions/monophobia-symptoms-causes-complication-and-treatment"
+       target="_blank">
+      Más Información 👈
+    </a>
+  </div>
+</section>
+
+
+<section id="opinion" class="section">
+  <h2>Lo que los demás piensan de mí</h2>
+  <div class="content">
+    <p>Reflexiona sobre cómo influyen las opiniones externas en la autoestima y la construcción de la identidad personal.</p>
+  <img 
+  src="https://www.psiquiatrasonline.com/wp-content/uploads/2022/10/autoestima.jpg"
+  alt="Logo de Google"
+  style="width:200px; border-radius:12px;"
+>
+
+  </div>
+</section>
+
+<section id="talentos" class="section">
+  <h2>Talentos evidentes</h2>
+  <div class="content">
+    <p>Identificación de habilidades naturales que permiten el desarrollo personal, académico y social.</p>
+  </div>
+</section>
+
+<section id="proyecto" class="section">
+  <h2>Mi proyecto de vida</h2>
+  <div class="content">
+    <p>Planeación de metas a corto, mediano y largo plazo considerando valores, intereses y capacidades personales.</p>
+ <!-- VIDEO -->
+    <video controls>
+      <source src="video/proyecto.mp4" type="video/mp4">
+      Tu navegador no soporta video.
+    </video>
+
+  </div>
+</section>
+
+<section id="neurolinguistica" class="section">
+  <h2>Preferencias neurolingüísticas</h2>
+  <div class="content">
+    <ul class="list">
+      <li>Visual</li>
+      <li>Auditivo</li>
+      <li>Kinestésico</li>
+    </ul>
+     <a class="info-link" href="https://www.bing.com/ck/a?!&&p=6c21e3793933367de1e9de91e98eebfd99b7f1b3f54b7f63f09011d90217cf4aJmltdHM9MTc2Njg4MDAwMA&ptn=3&ver=2&hsh=4&fclid=39a2cfe8-48f1-6aa3-2bde-da2a49676b76&psq=Preferencias+neuroling%c3%bc%c3%adsticas&u=a1aHR0cHM6Ly9lcy5zY3JpYmQuY29tL2RvY3VtZW50LzY0ODU4NzM5Ni9URVNULURFLVBSRUZFUkVOQ0lBUy1ORVVST0xJTkdVSVNUSUNBUy1QQVJBLUVEVUNBQ0lPTg" target="_blank">
+  Más Información👈
+</a>
+  </div>
+</section>
+
+<section id="inteligencia" class="section">
+  <h2>Inteligencia social</h2>
+  <div class="content">
+    <p>Capacidad para comprender a los demás, relacionarse de forma empática y convivir en sociedad.</p>
+  </div>
+</section>
+
+<section id="decision" class="section">
+  <h2>Resolución de problemas y toma de decisiones</h2>
+  <div class="content">
+    <p>Proceso para analizar situaciones, evaluar opciones y elegir la mejor alternativa de forma responsable.</p>
+   
+  </div>
+</section>
+
+<section id="habilidades" class="section">
+  <h2>Habilidades sociales y comunicación</h2>
+  <div class="content">
+    <p>Incluyen la escucha activa, la expresión de ideas, el respeto y la comunicación asertiva.</p>
+  <img 
+  src="https://assets-global.website-files.com/64be95b96cfe9e427b6bf75c/6516841c9352eb1c54cb851d_www.therapyside.compost-eshabilidades-sociales-que-son-que-tipos-hay-y-para-que-sirven.png"
+  alt="Logo de Google"
+  style="width:200px; border-radius:12px;"
+>
+ <a class="info-link" href="https://www.bing.com/ck/a?!&&p=8812604d1c31e833a772d6ff5b61677fabfc58e6eeda034f727c2beb98661a50JmltdHM9MTc2Njg4MDAwMA&ptn=3&ver=2&hsh=4&fclid=39a2cfe8-48f1-6aa3-2bde-da2a49676b76&psq=Habilidades+sociales+y+comunicaci%c3%b3n&u=a1aHR0cHM6Ly9jb25jZXB0by5kZS9oYWJpbGlkYWRlcy1zb2NpYWxlcy8" target="_blank">
+  Más Información👈
+</a>
+  </div>
+</section>
+
+<section id="argumentos" class="section">
+  <h2>Tipos de argumentos y sus partes</h2>
+  <div class="content">
+    <ul class="list">
+      <li><b>Argumento lógico</b></li>
+      <li><b>Argumento emocional</b></li>
+      <li><b>Argumento de autoridad</b></li>
+      <li><b>Partes:</b> tesis, razones y conclusión</li>
+    </ul>
+    
+  </div>
+</section>
+ <a href="index.html" class="btn-volver">Volver al inicio</a><!-- Botón para ir a la página cuetionario de mate -->
+<a class="btn" href="CuestiRecu.html">Cuestionario de Recursos Socioemocionales
+</a>
+
+<footer>
+  <p>© 2025 — Recursos Socioemocionales</p>
+</footer>
+
+</main>
+<script>
+  const links = document.querySelectorAll("nav a");
+  const HEADER_OFFSET = 170; // ajustado a tu header
+
+  links.forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+
+      const id = link.getAttribute("href");
+      const section = document.querySelector(id);
+      if (!section) return;
+
+      const top =
+        section.getBoundingClientRect().top +
+        window.pageYOffset -
+        HEADER_OFFSET;
+
+      window.scrollTo({
+        top,
+        behavior: "smooth"
+      });
+
+      const title = section.querySelector("h2");
+      if (title) {
+        title.classList.remove("rebote");
+        void title.offsetWidth; // reinicia animación
+        title.classList.add("rebote");
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
